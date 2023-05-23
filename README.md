@@ -44,3 +44,207 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+TypeScript: https://github.com/gopinav/React-TypeScript-Tutorials.git
+
+2.)
+npx create-react-app react-typescript-demo --template typescript ==> template will configure typescript
+
+components defined in .tsx
+
+# ==========================================================================================
+
+3.)Typing Props:
+
+=============
+
+# App.tsx:
+
+import React from "react";
+import Greet from "./components/Greet";
+
+const App = () => {
+return (
+<div className="App">
+<p>Hello</p>
+<Greet name="Naveen" />
+</div>
+);
+};
+
+export default App;
+
+# Greet.tsx
+
+import React from "react";
+
+type GreetProps = {
+name: string;
+};
+const Greet = (props: GreetProps) => {
+const { name } = props;
+return (
+<div>
+<p>Hello {name}</p>
+</div>
+);
+};
+
+export default Greet;
+
+1.Advantages is in App.tsx if we pass other than string it will throw err ===> name={10}
+2.It will give auto suggestion like props.(it'll suggest the name)
+
+# ==========================================================================================
+
+4.)Basic Props:
+
+props for data type like string, number, boolean refer Greet.tsx
+
+For object refer person.tsx
+
+For array of object refer personList.tsx
+
+# ==========================================================================================
+
+5.) Advanced props:
+
+Status.tsx for status
+
+Heading.tsx
+
+Oscar.tsx for passing props to children
+
+# ==========================================================================================
+
+6.Event Props:
+
+Button.tsx & Input.tsx
+
+# ==========================================================================================
+
+7. Style Props:
+
+Container.tsx
+
+# ==========================================================================================
+
+8.Person.type.ts & import inm person.tsx
+
+For having lot more types
+
+///
+Reusing types in person.type.tsx and import it in PersonList.tsx
+
+# ==========================================================================================
+
+9. useState hook:
+
+IsLoggedIn.tsx
+
+//If we give isLoggedIn.length or setIsLoggedIn(0) typescript will infers and throws an error
+//typeScript will capture initial value(Here boolean) so it will throws error if we give values other than boolean
+
+# ==========================================================================================
+
+10.Usestate future value
+
+User.tsx
+
+const [user, setUser] = useState<AuthUser | null>(null);
+
+const [user, setUser] = useState(null); If we give like this it will take null only as a value if we try to update the state
+it'll give you the error
+  
+
+==========================================================================================
+==========================================================================================
+
+12.How to type the UseReducer:
+
+Counter.tsx
+
+We have to define state type and action type
+
+//check the type by giving type as boolean instead of string it'll throw error
+
+13. StrictAction types Counter.tsx
+
+# type: "increment" | "decrement"; //type:string
+
+==========================================================================================
+
+14. Usecontext:
+
+Refer context folder (Box, Theme, ThemeContext)
+
+This is for a known value
+
+# ==========================================================================================
+
+15. Usecontext future value:
+
+Refer context folder (UserContext, User)
+
+1.UserContext, App, User
+
+// export const UserContext = createContext<UserContextType | null>(null)
+export const UserContext = createContext({} as UserContextType);
+
+The line 2 will help us to get rid of null check in User.tsx
+// if (userContext) {
+userContext.setUser(null);
+// }
+setUser: React.Dispatch<React.SetStateAction<AuthUser | null>>; //Hover on setuser and copy what vs code gives
+  
+
+
+# ==========================================================================================
+
+16. UseRef:
+
+DomRef.tsx
+
+const inputRef = useRef<HTMLInputElement>(null!);
+
+null! allows us to focus input without optional chaining(inputRef.current?.focus())
+
+MutableRef.tsx
+
+A.)To fix the error: window.clearInterval(interValRef.current);
+
+1.)const interValRef = useRef<number | null>(null); ==> change null to undefined ==> const interValRef = useRef<number | undefined>(undefined);
+2.)if (interValRef.current) {
+window.clearInterval(interValRef.current);
+}
+
+B.) To fix the null error in useeffect
+const interValRef = useRef<number | null>(null);
+
+For Dom Ref prefer the DOM Element type ==>HTMLInputElement
+
+For Mutable Ref prefer the appropriate type ==> const interValRef = useRef<number | null>(null);
+
+# ==========================================================================================
+
+18. Component:
+
+auth folder
+
+component: React.ComponentType<ProfileProps>;
+
+# ==========================================================================================
+
+19. Generic props:
+
+List.tsx
+
+T is sort of conversion and stands for type
+
+# ==========================================================================================
+
+20.Restricting props:
+
+23. Extract comp props:
+
+Refer html -> customComponent
